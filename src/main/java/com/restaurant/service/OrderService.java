@@ -1,20 +1,25 @@
 package com.restaurant.service;
 
+import java.awt.Menu;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.restaurant.entity.OrderEntity;
 import com.restaurant.repository.OrderRepository;
+
+import jakarta.persistence.OrderBy;
 
 
 @Service
 public class OrderService{
 	
 	@Autowired
-	private OrderRepository orderRepository;
-
+	private static OrderRepository orderRepository;
+	
     
 	public void addOrder(OrderEntity order) {
 		orderRepository.save(order);
@@ -22,22 +27,27 @@ public class OrderService{
 	}
 
 	public List<OrderEntity> getAll() {
-		return (List<OrderEntity>) orderRepository.findAll();
+		return orderRepository.findAll();
 	}
 
-	public List<OrderEntity> getOrder() {
-		// TODO Auto-generated method stub
-		return null;
+
+	public void updateOrder(Long id, OrderEntity order) {
+		Optional<OrderEntity> repoOrder = orderRepository.findById(id);
+	     BeanUtils.copyProperties(repoOrder, order);
+	     orderRepository.save(order);	
 	}
 
-	public static List<OrderEntity> updateMenu() {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteOrder(Long id) {
+		 orderRepository.deleteById(id);
 	}
 
-	public List<OrderEntity> deleteOrder() {
-		// TODO Auto-generated method stub
-		return null;
+
+
+	public void searchMenuById(Long id) {
+		orderRepository.findById(id);
 	}
+		
+
+	
 	
 }

@@ -1,7 +1,8 @@
 package com.restaurant.entity;
 
-import java.util.Objects;
 
+
+import java.util.Objects;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,21 +10,25 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="MENU_TB")
 public class MenuEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long id; 
 	@Column(name="M_NAME")
+	@NotBlank
 	private String name;
+	@NotBlank
     private String description;
+	@NotBlank
     private String image;
-    private int price;
+	@NotBlank
+    private String price;
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	//@JoinColumn(name = "order")
      private OrderEntity order;
@@ -34,7 +39,7 @@ public class MenuEntity {
 		super();
 	}
 
-	public MenuEntity(Long id, String name, String description, String image, int price, OrderEntity order) {
+	public MenuEntity(Long id, String name, String description, String image, String price, OrderEntity order) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,8 +48,17 @@ public class MenuEntity {
 		this.price = price;
 		this.order = order;
 	}
+	
+	public MenuEntity(Long id, String name, String description, String image, String price) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.image = image;
+		this.price = price;
+	}
 
-    public Long getId() {
+
+	public Long getId() {
 		return id;
 	}
 
@@ -68,11 +82,11 @@ public class MenuEntity {
         this.image = image;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

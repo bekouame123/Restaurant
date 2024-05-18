@@ -8,12 +8,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer",
@@ -24,8 +26,10 @@ public class OrderEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	@NotBlank
     private String billNo;
     private int quantity;
+	@NotBlank
     private String orderedTime;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "order")
     @JsonIgnore
@@ -38,11 +42,10 @@ public class OrderEntity {
 		super();
 	}
 
-	public OrderEntity(Long id, String billNo, List<MenuEntity> menu, int quantity, String orderedTime) {
+	public OrderEntity(Long id, String billNo, int quantity, String orderedTime) {
 		super();
 		this.id = id;
 		this.billNo = billNo;
-		this.menu = menu;
 		this.quantity = quantity;
 		this.orderedTime = orderedTime;
 	}

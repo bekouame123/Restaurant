@@ -8,8 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="customers") //this is because User is a reserved keyword in sql.
-public class CustomerEntity {
+@Table(name="user") //this is because User is a reserved keyword in sql.
+public class UserEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false,updatable = false)
@@ -21,11 +21,11 @@ public class CustomerEntity {
     @Column(nullable = false)
     private String role;
 
-    public CustomerEntity(){
+    public UserEntity(){
 
 }
 
-	public CustomerEntity(Long id, String username, String password, String role) {
+	public UserEntity(Long id, String username, String password, String role) {
 		super();
 		this.id = id;
 		this.username = username;

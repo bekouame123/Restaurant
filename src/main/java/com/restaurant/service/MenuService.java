@@ -8,9 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.restaurant.entity.MenuEntity;
+import com.restaurant.entity.OrderEntity;
 import com.restaurant.repository.MenuRepository;
 
 
@@ -19,38 +18,32 @@ public class MenuService {
     
 	
 	@Autowired
-	private MenuRepository repository;
+	private MenuRepository Menurepository;
 	
 	
 	public void addMenu(MenuEntity menu) {
-		repository.save(menu) ;
+		Menurepository.save(menu) ;
 	}
-
-
+	
+	
 	public List<MenuEntity> getAll() {
-		return repository.findAll();
+		return Menurepository.findAll();
 	}
-
-
-
+	
+	
 	public void removeMenuById(Long id) {
-		repository.deleteById(id);
-		
+		Menurepository.deleteById(id);	
 	}
-
 
 	public void searchMenuById(Long id) {
-		repository.findById(id);
-		
+		Menurepository.findById(id);	
 	}
 
-
-	public void updateMenuBy(Long id,MenuEntity menu) {
-		Optional<MenuEntity> repoMenuEntity = repository.findById(id);
-
-     BeanUtils.copyProperties(repoMenuEntity, menu);
-     
-     repository.save(menu);
 	
+	public void updateMenuBy(Long id, MenuEntity menu) {
+		Optional<MenuEntity> repoOrder = Menurepository.findById(id);
+	     BeanUtils.copyProperties(repoOrder, menu);
+	     Menurepository.save(menu);	
+	}
 	
 }

@@ -1,10 +1,8 @@
 package com.restaurant;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.restaurant.repository.CustomerRepository;
-import com.restaurant.service.CustomerService;
 
 @SpringBootApplication
 public class RestaurantManagerApplication{
@@ -28,4 +26,5 @@ public class RestaurantManagerApplication{
 //	
 //
 //
-}}
+   }
+}
